@@ -12,8 +12,8 @@ unset USERNAME
 export WORKON_HOME=~/workspace
 export PATH=/usr/local/sbin:$PATH:$HOME/bin:$HOME/.local/lib/aws/bin
 
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+#export PATH="$HOME/.rbenv/bin:$PATH"
+#eval "$(rbenv init -)"
 
 #for *BSD/darwin
 export CLICOLOR=1
@@ -36,3 +36,6 @@ export PATH="$PYENV_ROOT/bin:$PATH"
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
+
+export PATH=$PATH:/Users/dodde/.cargo/bin
+export BASH_SILENCE_DEPRECATION_WARNING=1
