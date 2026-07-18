@@ -6,11 +6,9 @@ export LC_ALL=en_US.UTF-8
 export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
 export HOMEBREW_NO_AUTO_UPDATE=TRUE     # don't auto-update on every brew invocation
 
-# ---- pyenv (shims must precede homebrew so pyenv's python wins)
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/shims:$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+# ---- Python (uv)
+# Migrated off pyenv. uv manages interpreters (`uv python install`) and per-project
+# .venv environments. No shell init needed; uv is on PATH via Homebrew.
 
 # ---- Other tool paths
 export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
@@ -28,7 +26,9 @@ compinit
 
 # ---- Prompt + history
 eval "$(starship init zsh)"
-. "$HOME/.atuin/bin/env"
+# ~/.atuin/bin/env only exists when atuin is installed via its official script;
+# Homebrew installs put atuin on PATH directly, so guard the source.
+[ -f "$HOME/.atuin/bin/env" ] && . "$HOME/.atuin/bin/env"
 eval "$(atuin init zsh --disable-up-arrow)"
 
 # ---- Misc
