@@ -1,0 +1,149 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# disable the newline at the start of the prompt
+add_newline = false
+
+# $time\ was originally at the beginning, but dropping it for extra space
+# add/remove $line_break\ before $character\ to get prompt character on same line as prompt
+
+format = """\
+  $time\
+  $directory\
+  $git_branch\
+  $git_status\
+  $line_break\
+  $character\
+"""
+
+command_timeout = 700
+
+# replace the prompt character
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
+
+# only show current and parent directory
+[directory]
+truncation_length = 3
+truncate_to_repo = false
+truncation_symbol = '../'
+style = "bright-blue"
+format = "[$path ]($style)[$read_only]($read_only_style)"
+
+# do not put prompt character on new line
+[line_break]
+disabled = true
+
+[time]
+disabled = true
+
+[git_branch]
+style = "yellow"
+
+[git_status]
+style = "yellow"
+deleted = "×"
+
+#------------ Disabled
+
+[nodejs]
+disabled = true
+
+[aws]
+disabled = true
+
+[conda]
+disabled = true
+symbol = " "
+
+[cmake]
+disabled=true
+
+[cobol]
+disabled=true
+
+[dart]
+disabled = true
+symbol = " "
+
+[docker_context]
+disabled = true
+symbol = " "
+
+[elixir]
+disabled = true
+symbol = " "
+
+[elm]
+disabled = true
+symbol = " "
+
+[golang]
+disabled = true
+symbol = " "
+
+[haskell]
+disabled=true
+
+[hg_branch]
+disabled = true
+symbol = " "
+
+[java]
+disabled = true
+symbol = " "
+
+[julia]
+disabled = true
+symbol = " "
+
+[memory_usage]
+disabled = true
+symbol = " "
+
+[nim]
+disabled = true
+symbol = " "
+
+[nix_shell]
+disabled = true
+symbol = " "
+
+
+#[package]
+#symbol = " "
+
+[perl]
+disabled = true
+symbol = " "
+
+[php]
+disabled = true
+symbol = " "
+
+[python]
+disabled = true
+
+[ruby]
+disabled = true
+symbol = " "
+
+[rust]
+disabled = true
+symbol = " "
+
+[scala]
+disabled = true
+symbol = " "
+
+[shlvl]
+disabled = true
+symbol = " "
+
+[swift]
+disabled = true
+symbol = "ﯣ "
+
+[lua]
+disabled = true
