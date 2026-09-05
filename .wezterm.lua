@@ -98,7 +98,11 @@ config.front_end = 'WebGpu'
 -- It also does not inherit WEZTERM_PANE, so the pane id is passed explicitly.
 config.keys = {
   {
-    key = 'V',
+    -- key='v' and key='V' resolve identically here; wezterm's show-keys prints
+    -- the SHIFTED character, so this binding lists as "CTRL  V" while plain
+    -- ctrl+v lists as "CTRL  v". Lowercase matches the upstream docs.
+    -- Verify with: wezterm show-keys | grep -E 'CTRL +V'
+    key = 'v',
     mods = 'CTRL|SHIFT',
     action = wezterm.action_callback(function(_, pane)
       wezterm.background_child_process({
