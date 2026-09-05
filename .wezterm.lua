@@ -89,31 +89,6 @@ config.window_decorations = 'TITLE|RESIZE'
 config.front_end = 'WebGpu'
 
 
--- Voice input for Claude Code. CTRL+SHIFT+V starts recording; sox stops on its
--- own after ~1.8s of silence, or press again to cut it short. The transcript is
--- TYPED into the prompt, not submitted, so you review before sending.
---
--- background_child_process is deliberate: SpawnCommandInNewWindow would steal
--- focus, and you want the terminal you are talking at to stay in front of you.
--- It also does not inherit WEZTERM_PANE, so the pane id is passed explicitly.
-config.keys = {
-  {
-    -- key='v' and key='V' resolve identically here; wezterm's show-keys prints
-    -- the SHIFTED character, so this binding lists as "CTRL  V" while plain
-    -- ctrl+v lists as "CTRL  v". Lowercase matches the upstream docs.
-    -- Verify with: wezterm show-keys | grep -E 'CTRL +V'
-    key = 'v',
-    mods = 'CTRL|SHIFT',
-    action = wezterm.action_callback(function(_, pane)
-      wezterm.background_child_process({
-        '/bin/bash', '-c',
-        'WEZTERM_PANE=' .. tostring(pane:pane_id()) ..
-        ' exec "$HOME/projects/github/unxmaal/localharness/voice/listen.sh"',
-      })
-    end),
-  },
-}
-
 -- and finally, return the configuration to wezterm
 return config
 

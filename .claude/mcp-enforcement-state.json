@@ -5,7 +5,7 @@
     "mutator_calls": 3
   },
   "acc5f952-0993-4b1a-9721-41c44ce5ec3c": {
-    "builtin_calls": 3,
+    "builtin_calls": 5,
     "last_reset_at": 1788633270.97264,
     "first_seen_at": "2026-09-05T15:04:41.770971+00:00",
     "mutator_calls": 0,
