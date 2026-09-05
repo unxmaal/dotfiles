@@ -39,7 +39,23 @@ eval "$(atuin init zsh --disable-up-arrow)"
 unalias -a
 export CLAUDE_CODE_DISABLE_MOUSE_CLICKS=1
 
+# ---- Model weights
+# HF_HOME lives on the Models volume (DockCase C1P, 10 Gbps direct, measured
+# 1013 MB/s write / 959 MB/s cold read) because the internal disk runs at 92%
+# and a single 70B at 4-bit is ~40GB.
+#
+# Deliberately NOT guarded by a mount check: /Volumes is root-owned, so if the
+# drive is absent huggingface_hub cannot create the directory and fails loudly.
+# A silent fallback to ~/.cache/huggingface would re-download tens of GB onto
+# the internal disk, which has no room for it.
+export HF_HOME=/Volumes/Models/hf
+
 # ---- Local, machine-specific config (kept out of the repo)
 # Drop per-machine secrets/paths/aliases in ~/.zshrc_includes. Sourced last so it
 # can override anything above. e.g. this machine: source ~/.litellm_env
 [ -f ~/.zshrc_includes ] && source ~/.zshrc_includes
+# Lima BEGIN
+# Make sure iptables and mount.fuse3 are available
+PATH="$PATH:/usr/sbin:/sbin"
+export PATH
+# Lima END
