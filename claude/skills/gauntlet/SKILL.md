@@ -740,6 +740,42 @@ backfilled decision matches its receipt.
 **Instance:** pre-24 adoptions backfilled to whatever spec was on disk at
 migration time, found by the golden stores (#506, RULE #292).
 
+## A retraction never reaches the actor
+
+**Bitten:** 2.
+
+**Trigger:** has a command, plan or instruction been handed to someone who will
+act on it later? If it is withdrawn, what guarantees they see the withdrawal
+before they act?
+
+**Tier:** 3.
+
+**Test shape:** none mechanical. Put any retraction first, in bold, on the
+channel the actor reads at the moment of acting; never reverse a handed-out
+command mid-message. Assume an actor who read the first version acts on it.
+
+**Instance:** a deploy command was handed out and then retracted further down a
+later message; the deploy ran on the old instruction (2026-10-30, KB NEGATIVE
+on the plan reversal).
+
+## A result produced, never read
+
+**Bitten:** 2.
+
+**Trigger:** did a job, eval or probe finish? Is anything waiting on its
+output, and has anyone opened the output since it landed?
+
+**Tier:** 1 where jobs write a known report path: list finished jobs whose
+report has no recorded read.
+
+**Test shape:** finish a job with a planted report, assert the status lists it
+as unread until it is acknowledged.
+
+**Instances:** the contamination probe (job 0198) finished overnight and its
+report sat unread while later decisions were made; kb-filter reports
+(0182-0184) contradicted a note about #1342's gate that nobody reconciled
+(2026-10-30).
+
 ---
 
 # Adding an entry
